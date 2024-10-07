@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{/layout/plantilla::head}"></head>
+    <body>
+
+        <div th:replace="~{/layout/plantilla2::nav}"></div>
+        <header th:replace="~{/fragmentos::banner}"></header>
+        <section th:replace="~{/fragmentos::patrocinadores}"></section>
+       
+        <section th:replace="~{/fragmentos::stats}"></section>
+        <div class="mt-5"></div>
+        <section th:replace="~{/fragmentos::evento}"></section>
+        <section th:replace="~{/fragmentos::donaciones}"></section>
+        <section th:replace="~{/fragmentos::img-perro}"></section>
+        <footer th:replace="~{/layout/plantilla2::footer}"></footer>
+
+
+
+
+    </body>
+
+
+</html>

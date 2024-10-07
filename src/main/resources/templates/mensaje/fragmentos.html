@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla::head}"></head>
+    <body >
+
+        <header th:fragment="headerSecundario" class="hed2" style="width: 84%; top: 0; left: 16%;">
+
+  <nav class="position-absolute" style="--bs-breadcrumb-divider: '>'; top:100%; width: 100%;" aria-label="breadcrumb">
+                <ol class="breadcrumb" style="background-color: #E4E4E4; ">
+                    <li class="breadcrumb-item">
+                        <a class="link-body-emphasis text-decoration-none ms-4" th:href="@{/admin/admin}"><font style=" vertical-align: inherit;"><font style="  position: relative; top: 1px; vertical-align: inherit;  font-weight: bold; color: #787469" >
+                                    Inicio</font></font></a>
+                    </li>
+                    <li style=" position: relative; top: 1px;" class="breadcrumb-item " aria-current="page"><font style="   vertical-align: inherit;"><font style="  vertical-align: inherit;  font-weight: bold; color: #787469">
+                                Mensajes
+                            </font></font></li>
+                    <li class="nav-item ms-auto" style="color: #5B9B9B; margin-right: 5%;">
+                        <form method="post" th:action="@{/logout}">
+                            <button class="btn">  
+                                <i class="fa fa-sign-in-alt" style="font-size: 16px; position: relative; top: -6px;"></i>
+                            </button> 
+                        </form>
+                    </li>
+                </ol>
+            </nav>   
+            
+            <div class="abajo-banner">
+                <div style="display: flex; align-items: center;">
+                    <div class="ms-4">
+                        <h2>Mensajes</h2>
+                    </div>
+
+                    <div  class="ms-auto" style="margin-right: 25%" th:if="${currentURL == 'http://localhost/mensaje/listado'}">
+                        <a class="nav-link " href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-search " viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-down " viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1.553 6.776a.5.5 0 0 1 .67-.223L8 9.44l5.776-2.888a.5.5 0 1 1 .448.894l-6 3a.5.5 0 0 1-.448 0l-6-3a.5.5 0 0 1-.223-.67z"/>
+                            </svg>
+                        </a>
+
+                        <div class="dropdown-menu  translate-middle-y top-100 bottom-0 end-0 start-50 ms-5 card-header" style=" width: 35%; ">
+                            <form method="POST" th:action="@{/mensaje/consulta}" 
+                                  class="was-validated" >
+                                <div class="card" style="background-color: #BFA38E">     
+                                    <div class="m-3  rounded rounded-bottom "> <!-- Cambiar el color del encabezado aquí -->
+                                        <h5 ><b>Filtrar por:</b></h5>
+                                    </div>
+                                    <div class="card-body bg-white">
+                                        <div class="m-3">
+                                            <label for="nombreFiltro" ><b>Nombre</b></label>
+                                            <input type="text" class="form-control" 
+                                                   th:value="${nombreFiltro}"
+                                                   th:name="nombreFiltro" required="true"/>
+                                        </div>
+
+                                    </div>
+                                    <div class="card-footer text-center border-0 bg-white" >
+                                        <button type="submit" class="btn btn-secondary">
+                                            <i></i> Buscar
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="linea-negra"></div>
+            </div>
+
+
+        </header>
+
+
+
+        <div th:fragment="listado" class="table-responsive position-absolute top-50" style="width: 84%;  left: 16%;" >
+
+            <div th:if="${mensajes != null and !mensajes.empty}">
+                <table class="table table-striped table-sm justify-content-center text-center">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Correo</th>
+                            <th scope="col">Telefono</th>
+                            <th scope="col">Mensaje</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="mensaje, contador : ${mensajes}">
+                            <td>[[${contador.count}]]</td>
+                            <td>[[${mensaje.nombre}]]</td>
+                            <td>[[${mensaje.correo}]]</td>
+                            <td>[[${mensaje.telefono}]]</td>
+                            <td>[[${mensaje.texto}]]</td>
+                            <td>
+                                <div class="btn-group" style="width: 100%;">
+
+                                    <a class="btn btn-success rounded-2 m-2 w-100" th:href="@{/mensaje/ver/}+${mensaje.idMensaje}">
+                                        <i></i><b>Ver</b>
+                                    </a>
+                                    <a class="btn btn-danger rounded-2 m-2 w-100" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/mensaje/eliminar/}+${mensaje.idMensaje}">
+                                        <i></i><b>Eliminar</b>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div th:fragment="vista" class="table-responsive  position-absolute" style="width: 84%;  left: 16%; height: 100%; top:33%" th:object="${mensaje}">
+
+            <div class="position-absolute border rounded-5  " style="width: 15%; height: 8%; background-color: #787469; left: 40%">
+                <p th:text="'ID: '+*{idMensaje}" class="  text-light text-center" style="font-size: 35px;  top: -10%"></p>
+            </div>
+            <div class="modal-body p-5 pt-2 rounded-bottom" style="top: 15%; ">
+                <div class="row">
+
+                    <div class="col-md-6 " >
+                        <div class=" m-3">
+                            <label for="nombre" style="font-size: 25px;" class="mb-2">Nombre</label>
+                            <input th:field="*{nombre}"  class="form-control rounded-3 border-3" readonly="true" />   
+                        </div>
+                        <div class=" m-3">
+                            <label for="correo" style="font-size: 25px;" class="mb-2">Correo de Contacto</label>
+                            <input th:field="*{correo}"  class="form-control rounded-3 border-3" readonly="true" />   
+                        </div>
+                        <div class=" m-3">
+                            <label for="telefono" style="font-size: 25px;" class="mb-2">Teléfono</label>
+                            <input th:field="*{telefono}"  class="form-control rounded-3 border-3" readonly="true" />   
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+
+
+                        <div class=" m-3">
+                            <label for="mensaje" style="font-size: 25px;" class="mb-2">Mensaje</label>
+                            <textarea th:field="*{texto}"  class="form-control rounded-3 border-3" rows="9" cols="30"readonly="true" />   
+                        </div>
+
+
+                    </div>
+                    <div class="text-end mt-5">
+
+                        <a  class="btn text-light m-2" style="width: 12%; background-color: #787469" th:href="@{/mensaje/listado}">
+                            <i></i><b>Volver</b>
+                        </a>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+
+        <--<!-- Fragmentos para la vista de usuario -->
+
+        <header th:fragment="banner">
+            <div class="banner_contactanos d-flex align-items-center justify-content-center">
+                <div class="me-auto " style="margin-left:7%; margin-right: 20%">
+                    <h1 class="display-3 fw-bold text-truncate text-center">Contáctanos</h1>
+                </div>
+            </div>
+        </header>
+
+        <nav th:fragment="migajas_pan" class="mt-5 ms-5" aria-label="migaja de pan">
+            <ol class="breadcrumb breadcrumb-chevron rounded-3 mx-5">
+                <li class="breadcrumb-item">
+                    <a class="link-body-emphasis text-decoration-none" href="/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;  font-style: italic; font-weight: bold; color: #787469" >
+                                Inicio</font></font></a>
+                </li>
+                <li class="breadcrumb-item " aria-current="page"><font style="vertical-align: inherit;"><font style="vertical-align: inherit; font-style: italic; font-weight: bold; color: #787469">
+                            Contáctanos
+                        </font></font></li>
+            </ol>
+        </nav>
+
+        <!-- Contenido de la vista usuario -->
+        <div th:fragment="cont" class="container mt-5 mb-5">
+            <p class="fw-bold fs-4 me-auto" style="font-style: italic; margin-left: -2%">¡Envíenos un Mensaje!</p>
+            <div class="row justify-content-center">
+                <div class="col-md-6" style="width: 90%">
+                    <img src="/img/mensaje.png" alt="" style="width: 100%; margin-bottom: -12.5%;" class="order-md-first">
+                        <div class="border border-secondary border-3 rounded-5 p-4">
+                            <form method="POST" th:action="@{/mensaje/guardar}" th:object="${mensaje}" 
+                                  class="mx-auto was-validated" style="width: 70%; margin: 10%">
+                                <div class="form-group d-flex text-center mb-5">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="60" fill="currentColor" class="bi bi-person-fill me-2" viewBox="0 0 20 20" style="color: #207E81">
+                                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+                                    </svg>
+                                    <input type="text" class="form-control rounded-3" id="nombre" placeholder="Nombre" name="nombre"  required="true">
+                                </div>
+                                <div class="form-group d-flex text-center mb-5">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="60" fill="currentColor" class="bi bi-envelope-fill" viewBox="0 0 20 20" style="color: #207E81">
+                                        <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z" />
+                                    </svg>
+                                    <input type="text" class="form-control rounded-3" id="correo" placeholder="Correo" name="correo"  required="true">
+                                </div>
+                                <div class="form-group d-flex text-center mb-5">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="60" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 20 20" style="color: #207E81">
+                                        <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+                                    </svg>
+                                    <input type="text" class="form-control rounded-3" id="telefono" placeholder="Teléfono" name="telefono"  required="true" pattern="\d{8}" title="Debe ingresar exactamente 8 números." >
+                                </div>
+                                <div class="form-group d-flex text-center mb-5">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="60" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 20 20" style="color: #207E81">
+                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                    </svg>
+                                    <textArea type="text" rows="7" class="form-control rounded-3"  placeholder="Mensaje" name="texto"  required="true"></textArea>
+                                </div>
+
+                                <div class="d-flex justify-content-center">
+                                    <button type="submit" class="btn rounded-5 " style="width: 20%; background-color: #207E81"><b class="text-light" style="font-style: italic;">Enviar</b></button>
+                                </div>
+                            </form>
+                        </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+    </body>
+</html>

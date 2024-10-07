@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla::head}"></head>
+    <body>
+        <header th:replace="~{evento/fragmentos::headerSecundario}"></header>
+        <section th:replace="~{/layout/plantilla::nav}"></section>
+        <div th:replace="~{evento/fragmentos::agregarEvento}"></div>
+        <section th:replace="~{evento/fragmentos::botonesAgregar}"></section>
+     
+        <div th:replace="~{/evento/fragmentos::listado}"></div>
+  
+       
+
+
+
+    </body>
+</html>

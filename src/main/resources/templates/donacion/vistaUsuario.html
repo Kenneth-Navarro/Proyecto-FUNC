@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla2::head}"></head>
+    <body>
+        <div th:replace="~{/layout/plantilla2::nav}"></div>
+        <header th:replace="~{/donacion/fragmentos::banner}"></header>
+        <nav th:replace="~{/donacion/fragmentos::migajas_pan}"></nav>
+        <section th:replace="~{/donacion/fragmentos::frase_prin}"></section>
+        <section th:replace="~{/donacion/fragmentos::como_donar}"></section>
+        <div th:replace="~{/donacion/fragmentos::division_tarjeta}"></div>
+        <div th:replace="~{/donacion/fragmentos::donacion}"></div>
+
+        <footer th:replace="~{/layout/plantilla2::footer}"></footer>
+
+    </body>
+</html>

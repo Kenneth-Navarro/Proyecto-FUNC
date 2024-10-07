@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla::head}"></head>
+    <body >
+
+        <!-- Fragmentos para la vista de usuario -->
+
+        <header th:fragment="banner">
+            <div class="banner_informacion d-flex align-items-center justify-content-center">
+                <div class="me-auto " style="margin-left:7%; margin-right: 20%">
+                    <h1 class="display-3 fw-bold text-truncate text-center">¿Quiénes Somos?</h1>
+                </div>
+            </div>
+        </header>
+
+         <nav th:fragment="migajas_pan" class="mt-5 ms-5" aria-label="migaja de pan">
+            <ol class="breadcrumb breadcrumb-chevron rounded-3 mx-5">
+                <li class="breadcrumb-item">
+                    <a class="link-body-emphasis text-decoration-none" href="/" ><font style="vertical-align: inherit;"><font style="vertical-align: inherit;  font-style: italic; font-weight: bold; color: #787469" >
+                                Inicio</font></font></a>
+                </li>
+                <li class="breadcrumb-item " aria-current="page"><font style="vertical-align: inherit;"><font style="vertical-align: inherit; font-style: italic; font-weight: bold; color: #787469">
+                            ¿Quienes Somos?
+                        </font></font></li>
+            </ol>
+        </nav>
+
+        <!-- Contenido de la vista usuario -->
+        <div th:fragment="text" class="container mt-5 mb-5">
+            <p class="fw-bold fs-4 me-auto" style="font-style: italic; margin-left: -2%">Fundación Un Nuevo Comienzo</p>
+            <p class="fs-4 me-auto" style="font-style: italic; margin-left: -2%">¡Bienvenido a "Un Nuevo Comienzo"! Somos una fundación dedicada al bienestar y protección 
+                de los animales. Nuestra misión es brindarles un hogar seguro, amoroso y una segunda 
+                oportunidad para tener una vida plena y feliz.</p>
+
+
+        </div>
+
+        <div th:fragment="cont" class="mb-5">
+            <div class="row">
+                <div class="col-md-5 mt-5">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6 mx-auto mt-5">
+                                <h5 class="fw-bold fs-5" >Rescate y Rehabilitación</h5>
+                                <p class="" style="text-align: justify">
+                                    Nos especializamos en rescatar animales maltratados, abandonados o en situaciones de peligro. 
+                                    Nuestro equipo de voluntarios altamente capacitados y veterinarios expertos trabajan incansablemente 
+                                    para brindarles los cuidados necesarios, incluyendo atención médica, alimentación adecuada y rehabilitación emocional.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 d-flex justify-content-end px-0">
+                    <img src="/img/quienesSomos1.jpg" alt="" class="img-fluid" style="width: 120%;" />
+                </div>
+
+                <div class="col-md-7 d-flex justify-content-start px-0">
+                    <img src="/img/quienesSomos2.jpeg" alt="" class="img-fluid" style="width: 120%" />
+                </div>
+                <div class="col-md-5 mt-5">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6 mx-auto mt-5">
+                                <h5 class="fw-bold fs-5" >Adopciones Responsables</h5>
+                                <p class="" style="text-align: justify">
+                                    Buscamos familias amorosas y comprometidas 
+                                    que estén dispuestas a darles a nuestros animales
+                                    rescatados un nuevo hogar. Realizamos rigurosos
+                                    procesos de adopción para garantizar que nues
+                                    tros animales sean colocados en entornos seguros
+                                    y adecuados. También ofrecemos asesoramiento y 
+                                    seguimiento post-adopción para asegurarnos de 
+                                    que tanto los animales como las familias se adap
+                                    ten de manera positiva.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-5 mt-5">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6 mx-auto mt-5">
+                                <h5 class="fw-bold fs-5" >Voluntariado y Donaciones</h5>
+                                <p class="" style="text-align: justify">
+                                    Invitamos a personas comprometidas con la ca
+                                    usa animal a unirse a nuestro equipo como vo
+                                    luntarios. Hay muchas formas de contribuir, ya sea 
+                                    donando tiempo, recursos económicos, alimentos 
+                                    para animales o suministros médicos. Cada pe
+                                    queña acción cuenta y nos ayuda a brindar un 
+                                    mejor futuro para nuestros amigos de cuatro 
+                                    patas.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 d-flex justify-content-end px-0">
+                    <img src="/img/quienesSomos3.jpeg" alt="" class="img-fluid" style="width: 120%;" />
+                </div>
+            </div>
+        </div>
+
+
+
+    </body>
+</html>

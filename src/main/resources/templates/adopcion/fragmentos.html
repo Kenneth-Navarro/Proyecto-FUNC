@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla::head}"></head>
+    <body >
+
+
+        <header th:fragment="headerSecundario" class="hed2" style="width: 84%; top: 0; left: 16%;">
+
+              <nav class="position-absolute" style="--bs-breadcrumb-divider: '>'; top:100%; width: 100%;" aria-label="breadcrumb">
+                <ol class="breadcrumb" style="background-color: #E4E4E4; ">
+                    <li class="breadcrumb-item">
+                        <a class="link-body-emphasis text-decoration-none ms-4" th:href="@{/admin/admin}"><font style=" vertical-align: inherit;"><font style="  position: relative; top: 1px; vertical-align: inherit;  font-weight: bold; color: #787469" >
+                                    Inicio</font></font></a>
+                    </li>
+                    <li style=" position: relative; top: 1px;" class="breadcrumb-item " aria-current="page"><font style="   vertical-align: inherit;"><font style="  vertical-align: inherit;  font-weight: bold; color: #787469">
+                                Adopciones
+                            </font></font></li>
+                    <li class="nav-item ms-auto" style="color: #5B9B9B; margin-right: 5%;">
+                        <form method="post" th:action="@{/logout}">
+                            <button class="btn">  
+                                <i class="fa fa-sign-in-alt" style="font-size: 16px; position: relative; top: -6px;"></i>
+                            </button> 
+                        </form>
+                    </li>
+                </ol>
+            </nav>   
+
+            <div class="abajo-banner">
+                <div style="display: flex; align-items: center;">
+                    <div class="ms-4">
+                        <h2>Solicitudes de Adopción</h2>
+                    </div>
+
+                    <div class="ms-auto" th:if="${currentURL == 'http://localhost/adopcion/listado'}" style="margin-right: 25%" >
+                        <a class="nav-link " href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-search " viewBox="0 0 16 16">
+                                <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-compact-down " viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1.553 6.776a.5.5 0 0 1 .67-.223L8 9.44l5.776-2.888a.5.5 0 1 1 .448.894l-6 3a.5.5 0 0 1-.448 0l-6-3a.5.5 0 0 1-.223-.67z"/>
+                            </svg>
+                        </a>
+
+                        <div class="dropdown-menu  translate-middle-y top-100 bottom-0 end-0 start-50 ms-5 card-header" style="background-color: #5B9B9B; width: 35%; ">
+                            <form method="POST" th:action="@{/adopcion/consulta}" 
+                                  class="was-validated" >
+                                <div class="card  " style="background-color: #BFA38E">
+                                    <div class="m-3  rounded rounded-bottom "> <!-- Cambiar el color del encabezado aquí -->
+                                        <h5 ><b>Filtrar por:</b></h5>
+                                    </div>
+                                    <div class="card-body bg-white">
+                                        <div class="m-3">
+                                            <label for="cedulaFiltro" ><b>Número de Cédula</b></label>
+                                            <input type="number" class="form-control" 
+                                                   th:value="${cedulaFiltro}"
+                                                   th:name="cedulaFiltro" required="true"/>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer text-center border-0 bg-white">
+                                        <button type="submit" class="btn btn-secondary">
+                                            <i></i> Buscar
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="linea-negra"></div>
+            </div>
+
+
+
+
+        </header>
+
+        <section th:fragment="botonesAgregar" class="position-absolute" sec:authorize="hasRole('ROLE_ADMIN')" style="width: 90px; height: 90px; top: 32%; left: 18%;">
+            <div >
+                <div class="row">
+                    <div >   
+                        <button 
+                            type="button" 
+                            class="btn btn-primary btn-block" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#agregaradopcion" style="width: 100px">
+                            <i class="fas "></i><b>Nuevo</b>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div th:fragment="agregaradopcion" class="modal position-static d-block">
+
+            <div id="agregaradopcion" class="modal fade" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content" style="width: 1000px;height: 300px; margin: 0 auto;right: 200px; background-color: #599797">
+                        <div class="modal-header bg-text-dark " style="height: 50px;">
+                            <p style="height: 5px;" class="text-light"><b>Nueva Solicitud de Adopcion</b></p>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+
+                        <div class="modal-body p-5 pt-2" style="background-color: #FFFFFF">
+                            <form  th:action="@{/adopcion/guardar}" th:object="${adopcion}"
+                                   method="POST" class="was-validated row" enctype="multipart/form-data">
+                                <div class="col-md-6 ">
+                                    <div class="form-group m-3">
+
+                                        <div class=" m-3">
+                                            <label for="mascota"><b>Mascota</b></label>
+                                            <select id="id" name="mascota" class="form-select" aria-label="Default select example" required="true">
+                                                <option value="" class="disabled selected">Seleccione la Mascota</option>
+                                                <option th:each="mascota: ${mascotas}" th:value="${mascota.idMascota}" >[[${mascota.nombre}]]</option>
+
+                                            </select>
+
+                                        </div>
+                                        <div class=" m-3">
+                                            <label for="nombre"><b>Nombre Solicitante</b></label>
+                                            <input type="text" class="form-control rounded-3" name="nombre" required="true" />    
+                                        </div>
+
+                                        <div class=" m-3">
+                                            <label for="telefono"><b>Teléfono</b></label>
+                                            <input type="text" class="form-control rounded-3" name="telefono" required="true" pattern="\d{8}" title="Debe ingresar exactamente 8 números." />    
+                                        </div>
+
+                                        <div class=" m-3">
+                                            <label for="correo"><b>Correo</b></label>
+                                            <input type="text" class="form-control rounded-3" name="correo" required="true" />    
+                                        </div>
+                                        <div class=" m-3" >
+                                            <label for="cedula"><b>Cédula</b></label>
+                                            <input type="text"  class="form-control rounded-3" name="cedula" required="true" pattern="\d{9}" title="Debe ingresar exactamente 9 números."  />    
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group ">
+
+                                        <div class=" m-3">
+                                            <label for="edad"><b>Edad</b></label>
+                                            <input type="number" class="form-control rounded-3" name="edad" required="true" min="18" max="100"/>    
+                                        </div>
+
+                                        <div class=" m-3">
+                                            <p class="text-center"> <b>Dirección</b></p>    
+
+                                        </div>
+                                        <div class=" m-3">
+                                            <label for="provincia"><b>Provincia</b></label>
+                                            <input type="text" class="form-control rounded-3" name="provincia" required="true" />    
+                                        </div>
+                                        <div class=" m-3">
+                                            <label for="canton"><b>Cantón</b></label>
+                                            <input type="text" class="form-control rounded-3" name="canton" required="true" />    
+                                        </div>
+                                        <div class=" m-3">
+                                            <label for="distrito"><b>Distrito</b></label>
+                                            <input type="text" class="form-control rounded-3" name="distrito" required="true" />    
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                                <div class="form-group text-end">
+                                    <button class="btn rounded-2 me-2 text-light" type="button" data-bs-dismiss="modal" style="background-color: #787469; color: #363227; width: 100px; font-size: 17px; font-weight: 600;">Cancelar</button>
+                                    <button class="btn rounded-2 me-2"  type="submit" style="background-color: #207E81; color: #FFFFFF; width: 100px; font-size: 17px; font-weight: 600">Guardar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div th:fragment="listado" class="position-absolute top-50" style="width: 84%;  left: 16%;">
+
+
+            <div th:if="${adopciones != null and !adopciones.empty}">
+                <table class="table table-striped table-sm justify-content-center text-center">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Cedula</th>
+                            <th scope="col">Nombre Solicitante</th>
+                            <th scope="col">Edad</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="adopcion, contador : ${adopciones}">
+                            <td>[[${contador.count}]]</td>
+                            <td>[[${adopcion.cedula}]]</td>
+                            <td>[[${adopcion.nombre}]]</td>
+                            <td>[[${adopcion.edad}]]</td>
+
+                            <td  />
+
+                            <td>
+                                <div class="btn-group" style="width: 100%;">
+                                    <a class="btn btn-primary rounded-2 m-2 w-100" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/adopcion/modificar/}+${adopcion.idAdopcion}">
+                                        <i></i><b>Editar</b>
+                                    </a>
+                                    <a class="btn btn-success rounded-2 m-2 w-100" th:href="@{/adopcion/ver/}+${adopcion.idAdopcion}">
+                                        <i></i><b>Ver</b>
+                                    </a>
+                                    <a class="btn btn-danger rounded-2 m-2 w-100" sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/adopcion/eliminar/}+${adopcion.idAdopcion}">
+                                        <i></i><b>Eliminar</b>
+                                    </a>
+                                </div>
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+                  </div>
+
+
+        <div th:fragment="vista" class="position-absolute" style="width: 84%;  left: 16%; height: 100%; top:33%" th:object="${adopcion}">
+
+            <div class="position-absolute border rounded-5  " style="width: 15%; height: 8%; background-color: #787469; left: 40%">
+                <p th:text="'ID: '+*{idAdopcion}" class="  text-light text-center" style="font-size: 35px;  top: -10%"></p>
+            </div>
+            <div class="modal-body p-5 pt-2 " style="top: 15%; height: 100%; ">
+                <div class="row">
+                    <div class="col-md-6 ">
+                        <div class=" m-3">
+                            <label for="mascota" style="font-size: 25px;" class="mb-2">Mascota</label>
+                            <input th:field="*{mascota.nombre}"  class="form-control rounded-3 border-3" readonly="true" />   
+                        </div>
+
+                        <div class=" m-3">
+                            <label for="nombre" style="font-size: 25px;" class="mb-2">Nombre Solicitante</label>
+                            <input th:field="*{nombre}"  class="form-control rounded-3 border-3" readonly="true" />   
+                        </div>
+
+                        <div class=" m-3">
+                            <label for="telefono" style="font-size: 25px;" class="mb-2">Télefono</label>
+                            <input th:field="*{telefono}"  class="form-control rounded-3 border-3" readonly="true" />   
+                        </div>
+                        <div class=" m-3">
+                            <label for="correo" style="font-size: 25px;" class="mb-2">Correo</label>
+                            <input th:field="*{correo}"  class="form-control rounded-3 border-3" readonly="true" />   
+                        </div>
+                        <div class=" m-3">
+                            <label for="cedula" style="font-size: 25px;" class="mb-2">Cédula</label>
+                            <input th:field="*{cedula}"  class="form-control rounded-3 border-3" readonly="true" />   
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+
+                        <div class=" m-3">
+                            <label for="edad" style="font-size: 25px;" class="mb-2">Edad</label>
+                            <input th:field="*{edad}"  class="form-control rounded-3 border-3" readonly="true" />   
+                        </div>
+                        <div class=" m-3">
+                            <p class="text-center" style="font-size: 25px"><b>Dirección</b></p>
+                        </div>
+
+                        <div class=" m-3">
+                            <label for="provincia" style="font-size: 25px;" class="mb-2">Provincia</label>
+                            <input th:field="*{provincia}"  class="form-control rounded-3 border-3" readonly="true" />   
+                        </div>
+
+                        <div class=" m-3">
+                            <label for="canton" style="font-size: 25px;" class="mb-2">Canton</label>
+                            <input th:field="*{canton}"  class="form-control rounded-3 border-3" readonly="true" />   
+                        </div>
+
+                        <div class=" m-3">
+                            <label for="distrito" style="font-size: 25px;" class="mb-2">Distrito</label>
+                            <input th:field="*{distrito}"  class="form-control rounded-3 border-3" readonly="true" />   
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-end">
+
+                    <a  class="btn text-light mt-5" style="width: 12%; background-color: #787469;" th:href="@{/adopcion/listado}">
+                        <i></i><b>Volver</b>
+                    </a>
+                </div>
+                      </div>
+        </div>
+
+
+        <div th:fragment="editar" class="  position-absolute" style="width: 84%;  left: 16%; height: 100%; top:33%" th:object="${adopcion}">
+
+            <div class="position-absolute border rounded-5  " style="width: 15%; height: 8%; background-color: #787469; left: 40%">
+                <p th:text="'ID: '+*{idAdopcion}" class="  text-light text-center" style="font-size: 35px;  top: -10%"></p>
+            </div>
+            <div class="modal-body p-5 pt-2 rounded-bottom" style="top: 15%; ">
+
+                <form th:action="@{/adopcion/guardar}" th:object="${adopcion}"
+                      method="POST" class="was-validated row" enctype="multipart/form-data">
+                    <input type="hidden" name="idAdopcion" th:field="*{idAdopcion}"/>
+                    <div class="col-md-6">
+
+
+                        <div class=" m-3">
+                            <label for="mascota" style="font-size: 25px;">Mascota</label>
+                            <select id="id" name="mascota" th:field="*{mascota.idMascota}" class="form-select" aria-label="Default select example" required="true">
+
+                                <option th:each="mascota: ${mascotas}" th:value="${mascota.idMascota}">[[${mascota.nombre}]]</option>
+
+                            </select>
+
+                        </div>
+
+                        <div class=" m-3">
+                            <label for="nombre" style="font-size: 25px;">Nombre Solicitante</label>
+                            <input th:field="*{nombre}" type="text" class="form-control rounded-3" required="true" />   
+                        </div>
+
+                        <div class=" m-3">
+                            <label for="telefono" style="font-size: 25px;">Telefono</label>
+                            <input th:field="*{telefono}" type="number" class="form-control rounded-3" required="true" pattern="\d{8}" title="Debe ingresar exactamente 8 números." />   
+                        </div>
+
+
+                        <div class=" m-3">
+                            <label for="correo" style="font-size: 25px;">Correo</label>
+                            <input th:field="*{correo}" type="text" class="form-control rounded-3 " required="true" />   
+                        </div>
+
+                        <div class=" m-3">
+                            <label for="cedula" style="font-size: 25px;">Cedula</label>
+                            <input th:field="*{cedula}" type="text" class="form-control rounded-3 " required="true" pattern="\d{9}" title="Debe ingresar exactamente 9 números." />   
+                        </div>
+
+
+
+                    </div>
+                    <div class="col-md-6 ">
+                        <div class=" m-3">
+                            <label for="edad" style="font-size: 25px;">Edad</label>
+                            <input th:field="*{edad}" type="number" class="form-control rounded-3 " required="true" min="18" max="100"/>   
+                        </div>
+                        <div class=" m-3">
+                            <p class="text-center" style="font-size: 25px"><b>Dirección</b></p>
+                        </div>
+
+                        <div class=" m-3">
+                            <label for="provincia" style="font-size: 25px;">Provincia</label>
+                            <input th:field="*{provincia}" type="text" class="form-control rounded-3 " required="true" />   
+                        </div>
+
+                        <div class=" m-3">
+                            <label for="canton" style="font-size: 25px;">Canton</label>
+                            <input th:field="*{canton}" type="text" class="form-control rounded-3 " required="true" />   
+                        </div>
+
+                        <div class=" m-3">
+                            <label for="distrito" style="font-size: 25px;">Distrito</label>
+                            <input th:field="*{distrito}" type="text" class="form-control rounded-3 " required="true" />   
+                        </div>
+
+
+                    </div>
+
+                    <div class="text-end">
+                        <a  class="btn text-light m-2" style="width: 12%; background-color: #787469" th:href="@{/adopcion/listado}">
+                            <i></i><b>Volver</b>
+                        </a>
+                        <button type="submit" class="btn text-light m-2" style="width: 12%; background-color: #207E81">
+                            <i></i><b>Editar</b>
+                        </button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <header th:fragment="banner">
+            <div class="banner_adopcion d-flex align-items-center justify-content-center">
+                <div class="me-auto " style="margin-left:7%; margin-right: 20%">
+                    <h1 class="display-3 fw-bold text-truncate text-center">Adopción</h1>
+                </div>
+            </div>
+        </header>
+
+        <nav th:fragment="migajas_pan" class="mt-5 ms-5" aria-label="migaja de pan">
+            <ol class="breadcrumb breadcrumb-chevron rounded-3 mx-5">
+                <li class="breadcrumb-item">
+                    <a class="link-body-emphasis text-decoration-none" href="/"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;  font-style: italic; font-weight: bold; color: #787469" >
+                                Inicio</font></font></a>
+                </li>
+                <li class="breadcrumb-item " aria-current="page"><font style="vertical-align: inherit;"><font style="vertical-align: inherit; font-style: italic; font-weight: bold; color: #787469">
+                            Adopcion
+                        </font></font></li>
+            </ol>
+        </nav>
+
+
+        <section th:fragment="perros" class="ms-5">
+
+
+            <div class="mx-5" style="text-align: left;  ">
+
+            <div class="ms-5" style="text-align: left;  ">
+
+                <p style="font-size: 35px; font-weight: bold; font-style: italic;"> Animales Disponibles </p>
+            </div>
+        </section>
+
+       <div th:fragment="contenido_perros">
+    <div class="row justify-content-center d-flex ms-5">
+        <div th:each="mascota : ${mascotas}" class="col-md-4 mb-4" th:if="${not mascota.adoptada}">
+            <div class="card" style="width: 400px;">
+                <img height="200" class="card-img-top" th:src="${mascota.rutaImagen}" alt="Card image cap" />
+                <div class="card-body">
+                    <h5 class="card-title text-center" style="font-weight: bold" th:text="${mascota.nombre}"></h5>
+                    <p class="card-text"></p>
+                    <a th:href="@{/adopcion/vistaAdopcion_1/}+${mascota.idMascota}"
+                       class="btn d-flex justify-content-center"
+                       style="background-color: #BFA38E; color: #FFFFFF;">Saber Más</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        <header th:fragment="banner2">
+            <div class="banner_adopcion d-flex align-items-center justify-content-center">
+                <div class="me-auto " style="margin-left:7%; margin-right: 20%">
+                    <h1 class="display-3 fw-bold text-truncate text-center">Conoce a los animales</h1>
+                </div>
+            </div>
+        </header>
+
+              <nav th:fragment="migajas_pan2" class="mt-5 ms-5" aria-label="migaja de pan">
+            <ol class="breadcrumb breadcrumb-chevron rounded-3 mx-5">
+                <li class="breadcrumb-item">
+                    <a class="link-body-emphasis text-decoration-none" th:href="@{/index}"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;  font-style: italic; font-weight: bold; color: #787469" >
+                                Inicio</font></font></a>
+                </li>
+                <li class="breadcrumb-item " aria-current="page"><font style="vertical-align: inherit;"><font style="vertical-align: inherit; font-style: italic; font-weight: bold; color: #787469">
+                            Conoce a los animales
+                        </font></font></li>
+            </ol>
+        </nav>
+
+        <div th:fragment="imagen_perro"  th:object="${mascota}">
+
+            <div class="modal-body p-5 pt-2 " style="top: 15%;">
+                <form th:object="${mascota}">
+                    <div class="justify-content-center">
+                        <img id="blah" name="imagen" th:src="@{${mascota.rutaImagen}}" alt="your image" class="img-fluid rounded-5" style="max-height: 650px; width: 100%;" onchange="readURL(this);"/>
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="mb-4" style="height: 50px; " >
+                <h5 class= "fs-1 fw-bold text-center"   style=" color: #BFA38E;" th:text="'Nombre: '+${mascota.nombre}"></h5>
+            </div>
+
+
+
+            <div th:fragment="cont" class="container mt-5 mb-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-6" style="width: 100%">
+                        <div class="border border-secondary border-3 rounded-5 p-4">
+                            <div class="row">
+                                <div class="col-md-6 ">
+                                    <div class="form-group m-3">    
+                                        <div class=" m-3 fs-3 fw-bold">
+                                            <label><b>Información del animal</b></label>
+                                        </div>
+                                        <div class="m-3  d-flex mb-4 " >
+                                            <h4 class= " fw-bold " style=" color: #BFA38E;" >Codigo: </h4> <h4 class="ms-2" th:text=" ${mascota.idMascota}" ></h4> 
+                                        </div>
+                                        <div class="m-3 d-flex mb-4" >
+                                            <h4 class= " fw-bold "  style=" color: #BFA38E;">Año de rescate: </h4> <h4 class="ms-2" th:text=" ${mascota.anoRescate}" ></h4> 
+                                        </div>
+                                        <div class="m-3  mb-4" >
+                                            <h4 class= " fw-bold  " style=" color: #BFA38E;" >Descripcion </h4> <h4 class="ms-2" th:text="${mascota.descripcion}" ></h4> 
+                                        </div>
+                                    </div>
+                                </div>  
+                                <div class="col-md-6">
+                                    <div class="form-group ">
+                                        <form  th:action="@{/adopcion/guardar2}" th:object="${adopcion}"
+                                               method="POST" class="was-validated row" enctype="multipart/form-data">
+
+                                            <input type="hidden" name="mascota" th:value="${mascota.idMascota}"/>
+
+                                            <div class="m-3 d-flex mb-2">
+                                                <h3 style="color: #BFA38E;">¿Interesado/a en <span th:text="${mascota.nombre}" class="ms-2"></span>? ¡Envíenos tu <span class="text-center">información!</span></h3>
+                                            </div>
+
+                                            <div th:fragment="cont" class="container mt-5 mb-5">
+                                                <div class="row justify-content-center">
+                                                    <div class="col-md-6" style="width: 100%">
+                                                        <div class="border border-secondary border-3 rounded-5 p-4">
+                                                            <div class="row">
+                                                                <div class="col-md-6 ">
+                                                                    <div class="form-group m-3">    
+                                                                        <div >
+
+                                                                            <div class=" m-3" >
+                                                                                <label   for="nombre"><b></b></label>
+                                                                                <input placeholder="Nombre" type="text" class="form-control rounded-3" name="nombre" required="true" />    
+                                                                            </div>
+
+                                                                            <div class=" m-3">
+                                                                                <label for="telefono"><b></b></label>
+                                                                                <input placeholder="Teléfono"  type="text" class="form-control rounded-3" name="telefono" required="true" pattern="\d{8}" title="Debe ingresar exactamente 8 números." />    
+                                                                            </div>
+
+                                                                            <div class=" m-3">
+                                                                                <label for="correo"><b></b></label>
+                                                                                <input  placeholder="Correo" type="text" class="form-control rounded-3" name="correo" required="true" />    
+                                                                            </div>
+                                                                            <div class=" m-3" >
+                                                                                <label for="cedula"><b></b></label>
+                                                                                <input placeholder="Cédula" type="text"  class="form-control rounded-3" name="cedula" required="true" pattern="\d{9}" title="Debe ingresar exactamente 9 números." />    
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div> 
+                                                                <div class="col-md-6 ">
+                                                                    <div class="form-group ">    
+
+
+                                                                        <div class=" m-3">
+                                                                            <label for="edad"><b></b></label>
+                                                                            <input placeholder="Edad" type="number" class="form-control rounded-3" name="edad" required="true" max="100" min="18" />    
+                                                                        </div>
+
+                                                                        <div class=" m-3">
+                                                                            <label for="provincia"><b></b></label>
+                                                                            <input  placeholder="Provincia" type="text" class="form-control rounded-3" name="provincia" required="true" />    
+                                                                        </div>
+                                                                        <div class=" m-3">
+                                                                            <label for="canton"><b></b></label>
+                                                                            <input placeholder="Canton" type="text" class="form-control rounded-3" name="canton" required="true" />    
+                                                                        </div>
+                                                                        <div class=" m-3">
+                                                                            <label for="distrito"><b></b></label>
+                                                                            <input placeholder="Distrito" type="text" class="form-control rounded-3" name="distrito" required="true" />    
+                                                                        </div>
+
+                                                                        <div class=" text-end">
+                                                                            <button class="btn rounded-2 me-3"  type="submit" style="background-color: #BFA38E; color: #FFFFFF; width: 100px; font-size: 17px; font-weight: 600">Enviar</button>
+                                                                        </div>
+
+                                                                        <div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div> 
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+
+
+
+
+    </body>
+
+
+</html>

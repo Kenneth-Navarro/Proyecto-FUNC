@@ -1,0 +1,294 @@
+
+
+.hed {
+    background-color: #207E81;
+    background-image: url(/img/patitas.png);
+    height: 15vw;
+    width: 85%;
+    right: 0;
+    left: 15%;
+    position: absolute;
+
+}
+
+.hed2{
+    background-color: #5B9B9B;
+    position: absolute;
+    height: 8vw;
+    width: 85%;
+    right: 0;
+    left: 15%;
+
+
+}
+
+.abajo-banner{
+    height: 65px; /* Altura del banner */
+    background-color: #ffff; /* Color de fondo del banner */
+    margin: 0; /* Espacio inferior para separar el banner del contenido */
+    top: 125%;
+    width: 100%;
+    position: absolute;
+}
+
+.content {
+    background-color: #fff;
+}
+
+#perro_banner {
+    width: 200px;
+    height: 200px;
+    top: -50%;
+    transform-origin: top left; /* Punto de origen de la transformación */
+    transform: scale(1); /* Escala inicial de 1 */
+    left: 40%;
+    position: relative;
+}
+
+#h1_banner {
+    font-size: 60px;
+    position: relative;
+    top:5vw;
+}
+.text-migajas{
+    position: absolute;
+    top:  100%;
+}
+
+.link-estilizado {
+    color: #000; /* Color de texto deseado */
+    text-decoration: none; /* Sin subrayado */
+    cursor: default; /* Cambiar el cursor a un cursor predeterminado */
+
+
+
+}
+
+
+.custom-color{
+    background-color: #e9ecef;
+    color: #363227;
+}
+
+.custom-color:hover{
+    background-color: #363227;
+    color: #e9ecef
+}
+
+#logo{
+    margin: 20px;
+}
+
+.linea-negra {
+    border-top: 2px solid black;
+
+}
+
+
+.sombra{
+    background-color: white;
+    padding: 10px 11px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    border-radius: 15px;
+    text-align: center;
+    margin:0 300px 0 280px;
+    width: 400px;
+}
+.top-50{
+    top: 40%!important;
+
+}
+
+.banner_section{
+    color:#FFFFFF;
+    line-height: 1.80857;
+    padding-top: 150px;
+    background: linear-gradient(140deg, #5B9B9B 48%, rgba(60, 90, 90, 0) 48%),url(/img/banner_index.png);
+    position: relative;
+    padding-bottom: 260px;
+    text-align: center;
+    background-size: cover; /* Ajustar la imagen para que cubra todo el contenedor */
+    background-position: right center;
+
+}
+
+.banner_evento {
+    color: #FFFFFF;
+    line-height: 1.80857;
+    padding-top: 200px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)) ,url(/img/banner_evento.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center 60% ;
+    position: relative;
+    padding-bottom: 200px;
+}
+
+.banner_evento1 {
+    color: #FFFFFF;
+    line-height: 1.80857;
+    padding-top: 200px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center ;
+    position: relative;
+    padding-bottom: 200px;
+}
+
+.banner_section3{
+    color: #FFFFFF;
+    line-height: 1.80857;
+    padding-top: 20px;
+    background: linear-gradient(120deg, #5B9B9B 110vh, rgba(60, 90, 90, 0) 110vh), url(/img/banner_section3_evento.png);
+    position: relative;
+    padding-bottom: 20px;
+    text-align: center;
+    height: 40vh;
+    background-size: contain; /* Ajustar la imagen para que cubra todo el contenedor */
+    background-position: right center;
+}
+
+.banner_section2{
+    color: #FFFFFF;
+    line-height: 1.80857;
+    padding-top: 20px;
+    background: linear-gradient(120deg, #5B9B9B 110vh, rgba(60, 90, 90, 0) 110vh),url(/img/banner_donaciones.png);
+    position: relative;
+    padding-bottom: 20px;
+    text-align: center;
+    height: 40vh;
+    background-size: contain;
+    background-position: right center;
+}
+
+.banner_fraseP{
+    color:#FFFFFF;
+    line-height: 1.80857;
+    padding-top: 150px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(/img/donaciones_2.png);
+    position: relative;
+    padding-bottom: 110px;
+    text-align: center;
+    font-size: 15px;
+}
+.flex-donar{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom:5%;
+
+}
+.como_donar {
+    color: #FFFFFF;
+    max-width: 100%; /* Cambiamos a max-width en lugar de width */
+    height: auto; /* Cambiamos a auto para que la altura se ajuste al contenido */
+    border-radius: 25px; /* Reducimos un poco el radio de la esquina */
+    padding: 12% 10%;
+    font-size: 16px;
+    background-color: #f0f0f0;
+    background-image: url(/img/donaciones_3.png);
+    background-size: cover;
+    background-position: center;
+
+}
+
+.division-tarjeta {
+    background-image: url(/img/division_donaciones.png);
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 300px;
+}
+/*@media screen and (max-width: 768px) {
+    .division-tarjeta {
+        height: 200px;  Ajusta la altura para pantallas más pequeñas 
+    }
+}*/
+
+.banner_contactanos{
+    color: #FFFFFF;
+    line-height: 1.80857;
+    padding-top: 20px;
+    background: linear-gradient(120deg, #5B9B9B 110vh, rgba(60, 90, 90, 0) 110vh), url(/img/contactanos.jpg);
+    position: relative;
+    padding-bottom: 20px;
+    text-align: center;
+    height: 40vh;
+    background-size: contain; /* Ajustar la imagen para que cubra todo el contenedor */
+    background-position: right center;
+
+}
+
+.banner_informacion{
+    color: #FFFFFF;
+    line-height: 1.80857;
+    padding-top: 20px;
+    background: linear-gradient(120deg, #5B9B9B 110vh, rgba(60, 90, 90, 0) 110vh), url(/img/informacion.jpg);
+    position: relative;
+    padding-bottom: 20px;
+    text-align: center;
+    height: 40vh;
+    background-size: contain; /* Ajustar la imagen para que cubra todo el contenedor */
+    background-position: right center;
+
+}
+
+.donacion{
+    width: 1160px;
+    height: 700px;
+    margin-top: 20px;
+    border: 4px solid #787469;
+    border-radius: 35px;
+    padding: 10px;
+    text-align: initial;
+    margin-left: 100px;
+    color: #787469;
+    margin-bottom: 150px;
+
+}
+
+
+.carousel-inner .carousel-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+
+}
+.carousel-control-prev,
+.carousel-control-next {
+
+    width: 40px;
+    /* Ajusta el tamaño de los botones */
+}
+
+.banner_adopcion{
+    color: #FFFFFF;
+    line-height: 1.80857;
+    padding-top: 20px;
+    background: linear-gradient(120deg, #5B9B9B 110vh, rgba(60, 90, 90, 0) 110vh), url(/img/bannerAdopcion.jpg);
+    position: relative;
+    padding-bottom: 20px;
+    text-align: center;
+    height: 40vh;
+    background-size: contain; /* Ajustar la imagen para que cubra todo el contenedor */
+    background-position: right center;
+
+}
+
+
+#body_logueo{
+    margin: 0;
+    padding: 0;
+    background-image: url(/img/logueo.png);
+    background-size: 100vw 110vh;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+}
+
+
+

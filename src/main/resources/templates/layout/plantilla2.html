@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:fragment="head">
+        <meta charset="UTF-8"/>
+        <title>UNC</title>
+
+        <link href='https://unpkg.com/css.gg@2.0.0/icons/css/close.css' rel='stylesheet'/>
+
+        <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+
+        <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet"/>
+
+        <link rel="stylesheet" th:href="@{/css/style.css}"/>
+
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+
+        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+        <script th:src="@{/js/rutinas.js}"></script> <!-- Script de JavaScript ubicado en static-->
+
+
+
+    </head>
+    <body>
+
+        <nav th:fragment="nav" class="navbar navbar-expand-lg">
+            <div class="container-fluid ms-5" style="background-color:#ffffff;">  
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav ">
+                        <a class="nav-link mx-4" th:href="@{/}"><b>Inicio</b></a>
+                        <a class="nav-link mx-4 " th:href="@{/informacion/quienesSomos}"><b>¿Quienes Somos?</b></a>
+                        <a class="nav-link mx-4 " th:href="@{/adopcion/vistaAdopcion}"><b>Adopcion</b></a>
+                        <a class="nav-link mx-4" th:href="@{/donacion/vistaUsuario}"><b>Donaciones</b></a>
+                        <a class="nav-link mx-4" th:href="@{/evento/vistaEvento}"><b>Eventos</b></a>
+                        <a class="nav-link mx-4" th:href="@{/mensaje/contactanos}"><b>Contáctanos</b></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+
+
+        <footer th:fragment="footer" class="d-flex flex-wrap justify-content-between align-items-center py-3  border-top mt-5" style="background-color:#BFA38E; ">
+            <div class="mx-5">
+                <h5><b>PRINCIPALES</b></h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary"><b>Inicio</b></a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary"><b>¿Quienes Somos?</b></a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary"><b>Adopcion</b></a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary"><b>Donaciones</b></a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary"><b>Eventos</b></a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary"><b>Contáctanos</b></a></li>
+                </ul>
+            </div>
+            
+            <div>
+            <a href="/">
+                <img width="260px" height="260px" class="bi me-2 align-items-center" src="/img/logo.png" alt=""/>
+                </a>
+            </div>
+            
+            <div class="mx-5">
+                <h5><b>Politica</b></h5>
+                <ul class="nav flex-column ">
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary"><b>Terminos de Uso</b></a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary"><b>Privacidad</b></a></li>
+                  
+                </ul>
+            </div>
+
+        </footer>
+
+
+    </body>
+</html>

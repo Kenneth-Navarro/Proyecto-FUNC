@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="~{layout/plantilla::head}"></head>
+    <body >
+
+        <header th:fragment="header" class=" hed text-white justify-content-center text-center" style="width: 84%; top: 0; left: 16%;">
+            <div class="container-fluid" id="h1_banner">
+                <div class="row">
+                    <div class="col-12">
+                        <!-- Contenido del encabezado -->
+                        <h1>UNC</h1>
+                        <h4 style="font-style: italic">ADMINISTRACIÓN</h4>
+                        <img id="perro_banner" src="/img/perro.png" alt=""/>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="position-absolute" style="--bs-breadcrumb-divider: '>'; top:100%; width: 100%;" aria-label="breadcrumb">
+                <ol class="breadcrumb" style="background-color: #E4E4E4; ">
+                    <li class="breadcrumb-item">
+                        <a class="link-body-emphasis text-decoration-none ms-4" th:href="@{/admin/admin}"><font style=" vertical-align: inherit;"><font style="  position: relative; top: 6px; vertical-align: inherit;  font-weight: bold; color: #787469" >
+                                    Inicio</font></font></a>
+                    </li>
+                  
+                    <li class="nav-item ms-auto" style="color: #5B9B9B; margin-right: 5%;">
+                        <form method="post" th:action="@{/logout}">
+                            <button class="btn">  
+                                <i class="fa fa-sign-in-alt" style="font-size: 16px; position: relative; top: -px;"></i>
+                            </button> 
+                        </form>
+                    </li>
+                </ol>
+            </nav>  
+        </header>
+
+        <div th:fragment="contenido" class=" position-absolute top-50  start-50 translate-middle-x" style="">
+
+            <div>
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-2">
+
+                    <div class="col m-5" >
+                        <div class="card sombra">
+
+                            <img src="/img/mascotas.jpg" class="card-img-top" alt="card" />
+                            <div class="card-body ">
+                                <a th:href="@{/mascota/listado}" class="d-grid gap-2 d-md-block btn custom-color"><b>Mascotas</b> </a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col m-5">
+                        <div class="card sombra">
+                            <img src="/img/donaciones.jpg" class="card-img-top" alt="card"/>
+                            <div class="card-body">
+                                <a  th:href="@{/donacion/listado}" class="d-grid gap-2 d-md-block btn custom-color"><b>Donaciones</b></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col m-5">
+                        <div class="card sombra">
+                            <img src="/img/mensajes.jpg" class="card-img-top" alt=""/>
+                            <div class="card-body">
+                                <a th:href="@{/mensaje/listado}"  class="d-grid gap-2 d-md-block btn custom-color"><b>Mensajes</b></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col m-5">
+                        <div class="card sombra">
+                            <img src="/img/usuarios.jpg" class="card-img-top" alt=""/>
+                            <div class="card-body">
+                                <a th:href="@{/usuario/listado}"  class="d-grid gap-2 d-md-block btn custom-color"><b>Usuarios</b></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col m-5">
+                        <div class="card sombra">
+                            <img src="/img/eventos.jpg" class="card-img-top" alt=""/>
+                            <div class="card-body">
+                                <a  th:href="@{/evento/listado}" class="d-grid gap-2 d-md-block btn custom-color"><b>Eventos</b></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col m-5 ">
+                        <div class="card sombra ">
+                            <img src="/img/adopciones.jpg" class="card-img-top" alt=""/>
+                            <div class="card-body">
+                                <a  th:href="@{/adopcion/listado}" class="d-grid gap-2 d-md-block btn custom-color"><b>Adopciones</b></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col m-5 ">
+                        <div class="card sombra ">
+                            <img src="/img/patrocinador.jpg" class="card-img-top" alt="" />
+                            <div class="card-body">
+                                <a  th:href="@{/patrocinador/listado}" class="d-grid gap-2 d-md-block btn custom-color"><b>Patrocinadores</b></a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+            </body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      >
+    <head th:fragment="head">
+        <meta charset="UTF-8"/>
+        <title>FUNC</title>
+
+        <link href='https://unpkg.com/css.gg@2.0.0/icons/css/close.css' rel='stylesheet'/>
+
+        <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
+
+        <link th:href="@{/webjars/font-awesome/css/all.css}" rel="stylesheet"/>
+
+        <link rel="stylesheet" th:href="@{/css/style.css}"/>
+
+        <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+
+        <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+
+        <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+        <script th:src="@{/js/rutinas.js}"></script> <!-- Script de JavaScript ubicado en static-->
+        
+
+
+    </head>
+    <body>
+
+
+        <div th:fragment="nav" class="d-flex flex-column flex-shrink-0 p-3  position-fixed" style="width: 16%; height: 100%; background-color: #363227;">
+            <a href="/admin/admin" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                <svg class="bi pe-none" width="20" height="100"><use xlink:href="#"></use></svg>
+                <img width="150px" height="130px" class="img-fluid mb-5"    src="/img/logo.png" alt=""/>
+            </a>
+
+            <ul class="nav nav-pills flex-column mb-auto ">
+                <li class="mb-4 mt-4 ">
+                    <a th:href="@{/mascota/listado}" class="nav-link text-white text-start" aria-current="page">
+                        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
+                        <b>Mascotas</b>
+                    </a>
+                </li>
+                <li class="mb-4">
+                    <a th:href="@{/donacion/listado}" class="nav-link text-white text-start" aria-current="page">
+                        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+                        <b>Donaciones</b>
+                    </a>
+                </li>
+                <li class="mb-4" >
+                    <a th:href="@{/mensaje/listado}" class="nav-link text-white text-start" aria-current="page">
+                        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#"></use></svg>
+                        <b>Mensajes</b>
+                    </a>
+                </li>
+                <li class="mb-4">
+                    <a th:href="@{/usuario/listado}" class="nav-link text-white text-start" aria-current="page">
+                        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
+                        <b>Usuarios</b>
+                    </a>
+                </li>
+                <li class="mb-4">
+                    <a th:href="@{/evento/listado}" class="nav-link text-white">
+                        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
+                        <b>Eventos</b>
+                    </a>
+                </li>
+
+                <li class="mb-4">
+                    <a th:href="@{/adopcion/listado}" class="nav-link text-white">
+                        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
+                        <b>Adopciones</b>
+                    </a>
+                </li>
+                <li class="mb-4" >
+                    <a th:href="@{/patrocinador/listado}" class="nav-link text-white text-start" aria-current="page">
+                        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#"></use></svg>
+                        <b>Patrocinadores</b>
+                    </a>
+                </li>
+            </ul>
+
+
+        </div>
+
+    </body>
+</html>
